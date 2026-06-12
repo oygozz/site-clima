@@ -12,6 +12,7 @@ body {
   align-items: center;
   justify-content: center;
   color: #fff;
+  transition: background 0.6s ease;
 }
 
 .container {
@@ -205,4 +206,30 @@ body.mist {
 
 body.default-weather {
   background: linear-gradient(135deg, #101828, #1d4ed8);
+}
+body.clear {
+  background: linear-gradient(135deg, #0ea5e9, #facc15) !important;
+}
+
+body.clouds {
+  background: linear-gradient(135deg, #334155, #94a3b8) !important;
+}
+
+body.rain {
+  background: linear-gradient(135deg, #0f172a, #1e40af) !important;
+}
+
+body.storm {
+  background: linear-gradient(135deg, #111827, #581c87) !important;
+}
+
+body.mist {
+  background: linear-gradient(135deg, #475569, #cbd5e1) !important;
+}
+
+body.default-weather {
+  background: linear-gradient(135deg, #101828, #1d4ed8) !important;
+}
+body.hot {
+  background: linear-gradient(135deg, #f97316, #facc15) !important;
 }

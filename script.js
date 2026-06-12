@@ -114,7 +114,7 @@ async function getWeatherByCoords(lat, lon) {
 }
 
 function showWeather(data, title, lat, lon) {
-    changeBackground(data.weather[0].main);
+    changeBackground(data.weather[0].main, data.main.temp);
 
 
     const icon = data.weather[0].icon;
@@ -184,19 +184,29 @@ async function getForecast(lat, lon) {
         forecastContainer.innerHTML = `<p>❌ Erro ao carregar previsão.</p>`;
     }
 }
-function changeBackground(weatherMain) {
-    document.body.className = "";
+function changeBackground(weatherMain, temp) {
+    document.body.classList.remove(
+        "clear",
+        "clouds",
+        "rain",
+        "storm",
+        "mist",
+        "hot",
+        "default-weather"
+    );
 
-    if (weatherMain === "Clear") {
-        document.body.classList.add("clear");
-    } else if (weatherMain === "Clouds") {
-        document.body.classList.add("clouds");
-    } else if (weatherMain === "Rain" || weatherMain === "Drizzle") {
+    if (weatherMain === "Rain" || weatherMain === "Drizzle") {
         document.body.classList.add("rain");
     } else if (weatherMain === "Thunderstorm") {
         document.body.classList.add("storm");
     } else if (weatherMain === "Mist" || weatherMain === "Fog" || weatherMain === "Haze") {
         document.body.classList.add("mist");
+    } else if (temp >= 30) {
+        document.body.classList.add("hot");
+    } else if (weatherMain === "Clear") {
+        document.body.classList.add("clear");
+    } else if (weatherMain === "Clouds") {
+        document.body.classList.add("clouds");
     } else {
         document.body.classList.add("default-weather");
     }
