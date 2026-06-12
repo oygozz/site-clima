@@ -179,3 +179,30 @@ body {
   font-size: 12px;
   opacity: 0.85;
 }
+body {
+  transition: background 0.6s ease;
+}
+
+body.clear {
+  background: linear-gradient(135deg, #0ea5e9, #facc15);
+}
+
+body.clouds {
+  background: linear-gradient(135deg, #334155, #94a3b8);
+}
+
+body.rain {
+  background: linear-gradient(135deg, #0f172a, #1e40af);
+}
+
+body.storm {
+  background: linear-gradient(135deg, #111827, #581c87);
+}
+
+body.mist {
+  background: linear-gradient(135deg, #475569, #cbd5e1);
+}
+
+body.default-weather {
+  background: linear-gradient(135deg, #101828, #1d4ed8);
+}

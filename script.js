@@ -114,6 +114,9 @@ async function getWeatherByCoords(lat, lon) {
 }
 
 function showWeather(data, title, lat, lon) {
+    changeBackground(data.weather[0].main);
+
+
     const icon = data.weather[0].icon;
     const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
@@ -179,5 +182,22 @@ async function getForecast(lat, lon) {
     } catch (error) {
         console.error(error);
         forecastContainer.innerHTML = `<p>❌ Erro ao carregar previsão.</p>`;
+    }
+}
+function changeBackground(weatherMain) {
+    document.body.className = "";
+
+    if (weatherMain === "Clear") {
+        document.body.classList.add("clear");
+    } else if (weatherMain === "Clouds") {
+        document.body.classList.add("clouds");
+    } else if (weatherMain === "Rain" || weatherMain === "Drizzle") {
+        document.body.classList.add("rain");
+    } else if (weatherMain === "Thunderstorm") {
+        document.body.classList.add("storm");
+    } else if (weatherMain === "Mist" || weatherMain === "Fog" || weatherMain === "Haze") {
+        document.body.classList.add("mist");
+    } else {
+        document.body.classList.add("default-weather");
     }
 }
