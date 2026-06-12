@@ -36,9 +36,7 @@ Durante o desenvolvimento deste projeto, aprendi conceitos importantes como:
 
 ## 🌍 Acesse o projeto
 
-Cole aqui o link da Vercel:
-
-https://SEU-LINK-DA-VERCEL.vercel.app
+https://site-clima-gamma.vercel.app/
 
 ## 👨‍💻 Desenvolvedor
 
