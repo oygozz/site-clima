@@ -50,10 +50,19 @@ locationButton.addEventListener("click", () => {
         (error) => {
             console.log("Erro de localização:", error);
 
-          if (error.code === 1) {
-    weatherResult.innerHTML = `<p>⚠️ Você negou a permissão de localização.</p>`;
-} else {
-    getLocationByIP();
+       if (error.code === 1) {
+    weatherResult.innerHTML = `
+        <p>⚠️ Você negou a permissão de localização.</p>
+    `;
+} else if (error.code === 2) {
+    weatherResult.innerHTML = `
+        <p>⚠️ Não foi possível determinar sua localização.</p>
+    `;
+} else if (error.code === 3) {
+    weatherResult.innerHTML = `
+        <p>⚠️ O GPS demorou para responder.</p>
+        <p>Digite sua cidade manualmente para obter o clima.</p>
+    `;
 }
         },
         {
@@ -156,26 +165,6 @@ async function getWeatherByCoords(lat, lon) {
 
         weatherResult.innerHTML = `
             <p>❌ Erro ao buscar o clima pela localização.</p>
-        `;
-    }
-}
-async function getLocationByIP() {
-    weatherResult.innerHTML = `<p>📍 Buscando localização aproximada...</p>`;
-
-    try {
-        const response = await fetch("https://ipapi.co/json/");
-        const data = await response.json();
-
-        const lat = data.latitude;
-        const lon = data.longitude;
-
-        getWeatherByCoords(lat, lon);
-
-    } catch (error) {
-        console.error(error);
-
-        weatherResult.innerHTML = `
-            <p>⚠️ Não foi possível pegar sua localização.</p>
         `;
     }
 }
