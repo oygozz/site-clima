@@ -2,6 +2,7 @@ const cityInput = document.getElementById("cityInput");
 const searchButton = document.getElementById("searchButton");
 const locationButton = document.getElementById("locationButton");
 const weatherResult = document.getElementById("weatherResult");
+const searchHistory = document.getElementById("searchHistory");
 
 const apiKey = "588d699a40d96e905a4a36a7ebd97736";
 
@@ -13,6 +14,8 @@ function searchCity() {
         return;
     }
 
+    saveSearch(city);
+    hideHistory();
     getWeather(city);
 }
 
@@ -21,6 +24,22 @@ searchButton.addEventListener("click", searchCity);
 cityInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         searchCity();
+    }
+});
+
+cityInput.addEventListener("focus", openHistory);
+cityInput.addEventListener("click", openHistory);
+
+function openHistory() {
+    displaySearches();
+    showHistory();
+}
+document.addEventListener("click", (event) => {
+    if (
+        !cityInput.contains(event.target) &&
+        !searchHistory.contains(event.target)
+    ) {
+        hideHistory();
     }
 });
 
@@ -37,6 +56,7 @@ locationButton.addEventListener("click", () => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
 
+            hideHistory();
             getWeatherByCoords(lat, lon);
         },
         (error) => {
@@ -116,7 +136,6 @@ async function getWeatherByCoords(lat, lon) {
 function showWeather(data, title, lat, lon) {
     changeBackground(data.weather[0].main, data.main.temp);
 
-
     const icon = data.weather[0].icon;
     const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
@@ -184,6 +203,7 @@ async function getForecast(lat, lon) {
         forecastContainer.innerHTML = `<p>❌ Erro ao carregar previsão.</p>`;
     }
 }
+
 function changeBackground(weatherMain, temp) {
     document.body.classList.remove(
         "clear",
@@ -211,3 +231,53 @@ function changeBackground(weatherMain, temp) {
         document.body.classList.add("default-weather");
     }
 }
+
+function saveSearch(city) {
+    let searches = JSON.parse(localStorage.getItem("searches")) || [];
+
+    searches = searches.filter(item => item.toLowerCase() !== city.toLowerCase());
+    searches.unshift(city);
+    searches = searches.slice(0, 5);
+
+    localStorage.setItem("searches", JSON.stringify(searches));
+    displaySearches();
+}
+
+function displaySearches() {
+    const searches = JSON.parse(localStorage.getItem("searches")) || [];
+
+    if (searches.length === 0) {
+        searchHistory.innerHTML = "";
+        hideHistory();
+        return;
+    }
+
+    searchHistory.innerHTML = `
+        <h3>🕒 Pesquisas recentes</h3>
+        <ul>
+            ${searches.map(city => `
+                <li class="history-item" onclick="searchFromHistory('${city}')">📍 ${city}</li>
+            `).join("")}
+        </ul>
+    `;
+}
+
+function searchFromHistory(city) {
+    cityInput.value = city;
+    saveSearch(city);
+    hideHistory();
+    getWeather(city);
+}
+
+function showHistory() {
+    const searches = JSON.parse(localStorage.getItem("searches")) || [];
+
+    if (searches.length > 0) {
+        searchHistory.style.display = "block";
+    }
+}
+function hideHistory() {
+    searchHistory.style.display = "none";
+}
+
+displaySearches();

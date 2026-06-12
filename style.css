@@ -233,3 +233,80 @@ body.default-weather {
 body.hot {
   background: linear-gradient(135deg, #f97316, #facc15) !important;
 }
+.search-history {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.search-history ul {
+    list-style: none;
+    padding: 0;
+}
+
+.search-history {
+  margin-top: 22px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  text-align: left;
+}
+
+.search-history h3 {
+  font-size: 17px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.search-history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history-item {
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.13);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(4px);
+}
+.search-history {
+  display: none;
+  margin-top: 12px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  text-align: left;
+}
+
+.search-history h3 {
+  font-size: 17px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.search-history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history-item {
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.13);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(4px);
+}
